@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>3</storyId>
+    <title>to compute a compatibility score based on level</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/4-3-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a system</asA>
+    <iWant>to compute a compatibility score based on level distance, area proximity, and time overlap</iWant>
+    <soThat>有用な候補を上位に提示できる。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given ユーザープロフィール A/B When スコア関数を実行 Then レベル差・距離・時間帯重なりを重み付けしたスコアを返す（決定的出力）</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

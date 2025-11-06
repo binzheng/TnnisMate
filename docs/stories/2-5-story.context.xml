@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>5</storyId>
+    <title>to cancel a reservation with clear policy and</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/2-5-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a player/coach</asA>
+    <iWant>to cancel a reservation with clear policy and Undo</iWant>
+    <soThat>安心して操作できる。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given 予約詳細から「キャンセル」を選択 When ポリシー要約が表示され確定 Then 予約が取り消され、Undo Snackbar（6–8秒）が表示される</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TennisMate | UX Color Themes</title>
+    <style>
+      :root{
+        --primary:#2E7D32;--secondary:#1565C0;--success:#2E7D32;--warning:#ED6C02;--error:#D32F2F;--info:#0288D1;
+        --bg:#FAFAFA;--paper:#FFFFFF;--text:#1A1A1A;--muted:#5F6368;--divider:#E0E0E0;
+      }
+      body{font:16px/24px system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif;background:var(--bg);color:var(--text);margin:0;padding:24px}
+      h1,h2{margin:8px 0 16px}
+      .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+      .swatch{border:1px solid var(--divider);border-radius:8px;overflow:hidden;background:var(--paper)}
+      .swatch .chip{height:64px}
+      .swatch .meta{padding:8px 12px;font-size:14px;color:var(--muted)}
+      .row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+      .btn{border:none;border-radius:6px;padding:10px 14px;color:#fff;cursor:pointer}
+      .btn.ghost{background:#fff;color:var(--text);border:1px solid var(--divider)}
+      .card{border:1px solid var(--divider);border-radius:8px;padding:16px;background:var(--paper)}
+      .legend{display:flex;gap:8px;align-items:center}
+      .dot{width:12px;height:12px;border-radius:50%}
+    </style>
+  </head>
+  <body>
+    <h1>UX Color Themes</h1>
+    <p>セマンティックカラーの確認用スウォッチと簡易コンポーネント例。</p>
+
+    <h2>Semantic Swatches</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:var(--primary)"></div><div class="meta">primary #2E7D32</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--secondary)"></div><div class="meta">secondary #1565C0</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--success)"></div><div class="meta">success #2E7D32</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--warning)"></div><div class="meta">warning #ED6C02</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--error)"></div><div class="meta">error #D32F2F</div></div>
+      <div class="swatch"><div class="chip" style="background:var(--info)"></div><div class="meta">info #0288D1</div></div>
+    </div>
+
+    <h2>Components</h2>
+    <div class="row">
+      <button class="btn" style="background:var(--primary)">予約を作成</button>
+      <button class="btn" style="background:var(--secondary)">詳細を見る</button>
+      <button class="btn ghost">キャンセル</button>
+    </div>
+
+    <div class="card">
+      <div class="legend"><span class="dot" style="background:var(--success)"></span> 空き（Available）</div>
+      <div class="legend"><span class="dot" style="background:var(--warning)"></span> 混雑（Busy）</div>
+      <div class="legend"><span class="dot" style="background:var(--error)"></span> 衝突（Conflict）</div>
+      <div class="legend"><span class="dot" style="background:var(--info)"></span> お知らせ/特価</div>
+    </div>
+  </body>
+  </html>
+

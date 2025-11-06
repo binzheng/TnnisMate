@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>6</storyId>
+    <title>to add structured logging and Sentry</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/1-6-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a developer</asA>
+    <iWant>to add structured logging and Sentry</iWant>
+    <soThat>エラーの検知と原因追跡が可能になる。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given Sentry DSN とログ出力が設定され When 例外が発生 Then Sentry にイベントが送信され、構造化ログに `level,msg,requestId,userId` が出力される</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

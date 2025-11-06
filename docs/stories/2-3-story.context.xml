@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>3</storyId>
+    <title>a server-side conflict detection API</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/2-3-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a developer</asA>
+    <iWant>a server-side conflict detection API</iWant>
+    <soThat>予約重複や衝突を事前に防げる。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given API に日時/コート/参加者を渡す When 衝突がある Then 衝突一覧と原因（対象予約ID/時間帯）を返す / なければOKを返す</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>6</storyId>
+    <title>filter chips and quick search</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/2-6-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>an operator</asA>
+    <iWant>filter chips and quick search</iWant>
+    <soThat>近日/変更あり/要確認や施設/コーチ/期間で素早く絞り込める。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given フィルタチップ（近日/変更あり/要確認） When チップ/検索で条件を指定 Then カレンダーに反映、全解除ボタンで元に戻る</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

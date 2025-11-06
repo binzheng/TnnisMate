@@ -1,0 +1,30 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>7</epicId>
+    <storyId>6</storyId>
+    <title>an observability view of errors and slow endpoints</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/7-6-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>an operator</asA>
+    <iWant>an observability view of errors and slow endpoints (summary only)</iWant>
+    <soThat>問題の早期発見ができる。</soThat>
+    <tasks>- [ ] Implement per acceptance criteria</tasks>
+  </story>
+  <acceptanceCriteria>1. Given 観測ビュー When ログ/エラー/遅延を集計 Then 今日のエラー率/上位エラー/遅いAPIトップNが表示される</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

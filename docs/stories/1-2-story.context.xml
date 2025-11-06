@@ -1,0 +1,52 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>2</storyId>
+    <title>Material UI Theme (Semantic Colors &amp; Typography)</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/1-2-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a developer</asA>
+    <iWant>to introduce Material UI with a centralized theme (semantic colors and typography)</iWant>
+    <soThat>the UI has consistent visual language (color meanings, readability, accessibility) aligned with our UX spec</soThat>
+    <tasks>- [ ] Install MUI packages and wire ThemeProvider in `src/app/layout.tsx`
+  - [ ] Add `CssBaseline` and a `theme.ts` exporting `createTheme({...})`
+- [ ] Define palette, typography, components defaults in `theme.ts`
+- [ ] Implement focus-visible outline and hover/selected actions
+- [ ] Build `src/components/ui/ThemeSamples.tsx` showcasing: Buttons (primary/secondary), Alerts (success/warning/error/info), Card
+- [ ] Add a route or embed in homepage to visually verify theme
+- [ ] Verify A11y contrast minimums and document notes in Dev Notes</tasks>
+  </story>
+  <acceptanceCriteria>1. Install MUI packages: `@mui/material @emotion/react @emotion/styled`
+2. Create a theme provider at the app root (App Router) and wrap layout with `&lt;ThemeProvider&gt;` (and `&lt;CssBaseline/&gt;`)
+3. Define semantic colors per spec in the theme:
+   - primary: #2E7D32 (brand/primary actions)
+   - secondary: #1565C0 (secondary actions)
+   - success: #2E7D32 (Available)
+   - warning: #ED6C02 (Busy)
+   - error: #D32F2F (Conflict)
+   - info: #0288D1 (Campaign/Info)
+4. Define surfaces/typography:
+   - background.default #FAFAFA / paper #FFFFFF
+   - text.primary #1A1A1A / text.secondary #5F6368
+   - Font stack includes Roboto and Noto Sans JP
+   - Heading scale: h1 32/40, h2 24/32, h3 20/28; body1 16/24, body2 14/20
+5. Add focus-visible styles that meet A11y (3px ring + 2px offset); ensure buttons meet 3:1, text 4.5:1 contrast
+6. Create a sample page (or component gallery) demonstrating buttons, cards, and alerts in each severity (success/warning/error/info)
+7. No runtime or type errors; lint passes</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>

@@ -1,0 +1,42 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1</storyId>
+    <title>プロジェクト初期化（T3 Stack）</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06T06:31:14.593471</generatedAt>
+    <generator>BMAD Story Context Workflow (batch)</generator>
+    <sourceStoryPath>docs/stories/1-1-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a developer</asA>
+    <iWant>to initialize the Next.js (T3) project and repository with required options</iWant>
+    <soThat>the team can run and iterate quickly on a consistent, type-safe base</soThat>
+    <tasks>- [ ] Scaffold T3 app (`npm create t3-app@latest`) in repo root
+  - [ ] Confirm options: TS/App Router/tRPC/Prisma/NextAuth/Tailwind
+- [ ] Initialize Git, create first commit
+- [ ] Create `.env.example` and copy to `.env.local` (local only)
+  - [ ] Add placeholders: `NEXTAUTH_URL=http://localhost:3000`, `NEXTAUTH_SECRET=changeme`, `DATABASE_URL=postgres://...` (Neon later)
+- [ ] Verify dev server boots and page loads
+- [ ] Add quick-start section to `README.md`
+- [ ] Ensure `npm run lint` passes; fix any issues</tasks>
+  </story>
+  <acceptanceCriteria>1. Run `npm create t3-app@latest` and select: TypeScript=Yes, App Router=Yes, tRPC=Yes, Prisma=Yes, NextAuth=Yes, Tailwind=Yes
+2. Project builds and `npm run dev` starts without errors; landing page reachable locally
+3. Initialize Git repository; initial commit includes scaffolded files and `.env.example`
+4. Add `.env.local` (untracked) with placeholders: `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `DATABASE_URL` (values TBD in later stories)
+5. Document setup steps in `README.md` (commands, environment variables, dev server)
+6. Lint passes with starter config (`npm run lint`) and formatting rules are applied</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code></code>
+    <dependencies></dependencies>
+  </artifacts>
+  <constraints></constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Vitest + RTL; tRPC error shape; A11y contrast</standards>
+    <locations>Unit under src/**; integration for tRPC routers; UI tests later</locations>
+    <ideas></ideas>
+  </tests>
+</story-context>
