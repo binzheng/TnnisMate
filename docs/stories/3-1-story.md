@@ -1,6 +1,6 @@
 # Story 3.1: to createeditdelete lesson slots (datetimecourtcoachcapacity)
 
-Status: drafted
+Status: review
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 提供枠を柔軟に管理できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（枠の作成/一覧/削除の最小UIとAPI）
 
 ## Dev Notes
 
@@ -43,8 +43,11 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- Prisma に LessonSlot/Reservation/Policy を追加。tRPC lessonsRouter を作成し、list/create/update/delete/search を実装。管理UI `/admin/lessons/slots` で枠の追加/一覧/削除が可能に。
 
 ### File List
 
-- TBD
+- tennis_mate/prisma/schema.prisma
+- tennis_mate/src/server/api/routers/lessons.ts
+- tennis_mate/src/server/api/root.ts
+- tennis_mate/src/app/admin/lessons/slots/page.tsx

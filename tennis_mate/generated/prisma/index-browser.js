@@ -157,7 +157,9 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image'
+  image: 'image',
+  passwordHash: 'passwordHash',
+  role: 'role'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -166,9 +168,116 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.FacilityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourtScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  facilityId: 'facilityId'
+};
+
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  userId: 'userId',
+  start: 'start',
+  end: 'end',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonSlotScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  coachId: 'coachId',
+  capacity: 'capacity',
+  start: 'start',
+  end: 'end',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonReservationScalarFieldEnum = {
+  id: 'id',
+  slotId: 'slotId',
+  userId: 'userId',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonPolicyScalarFieldEnum = {
+  id: 'id',
+  lessonType: 'lessonType',
+  priceYen: 'priceYen',
+  cancelDeadlineHours: 'cancelDeadlineHours',
+  penaltyApplicable: 'penaltyApplicable',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PlayerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  level: 'level',
+  area: 'area',
+  available: 'available',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MatchRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  start: 'start',
+  end: 'end',
+  levelMin: 'levelMin',
+  levelMax: 'levelMax',
+  area: 'area',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MatchProposalScalarFieldEnum = {
+  id: 'id',
+  fromUser: 'fromUser',
+  toUser: 'toUser',
+  start: 'start',
+  end: 'end',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ImportJobScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  source: 'source',
+  status: 'status',
+  createdAt: 'createdAt',
+  finishedAt: 'finishedAt',
+  added: 'added',
+  updated: 'updated',
+  removed: 'removed'
+};
+
+exports.Prisma.ScoreRecordScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  opponentId: 'opponentId',
+  date: 'date',
+  result: 'result',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -181,13 +290,35 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.Role = exports.$Enums.Role = {
+  player: 'player',
+  coach: 'coach',
+  operator: 'operator',
+  admin: 'admin'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',
   Account: 'Account',
   Session: 'Session',
   User: 'User',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  Facility: 'Facility',
+  Court: 'Court',
+  Reservation: 'Reservation',
+  LessonSlot: 'LessonSlot',
+  LessonReservation: 'LessonReservation',
+  LessonPolicy: 'LessonPolicy',
+  PlayerProfile: 'PlayerProfile',
+  MatchRequest: 'MatchRequest',
+  MatchProposal: 'MatchProposal',
+  ImportJob: 'ImportJob',
+  ScoreRecord: 'ScoreRecord'
 };
 
 /**

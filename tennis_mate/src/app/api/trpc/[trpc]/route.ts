@@ -29,6 +29,24 @@ const handler = (req: NextRequest) =>
             );
           }
         : undefined,
+    // Set HTTP status and headers for certain errors
+    responseMeta({ errors, type }) {
+      const unauthorized = errors.find((e) => e.code === "UNAUTHORIZED");
+      if (unauthorized) {
+        // Compute callback from header or current path
+        const ref = req.headers.get("x-trpc-referrer") ?? (req.nextUrl.pathname + req.nextUrl.search);
+        const login = new URL("/login", req.nextUrl.origin);
+        login.searchParams.set("callbackUrl", ref);
+        return {
+          status: 401,
+          headers: {
+            // Hint for clients; fetch won't auto-navigate, but clients can read this header
+            "x-redirect-to": login.toString(),
+          },
+        };
+      }
+      return {};
+    },
   });
 
 export { handler as GET, handler as POST };

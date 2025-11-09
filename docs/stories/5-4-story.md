@@ -1,6 +1,6 @@
 # Story 5.4: to apply the diff with audit logging and
 
-Status: drafted
+Status: done
 
 ## Story
 

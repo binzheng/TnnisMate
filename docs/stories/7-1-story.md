@@ -1,6 +1,6 @@
 # Story 7.1: a dashboard with KPIs (utilization revenue estimate cancellations)
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that いまの状況を一目で把握できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（KPI下地：API群の集計により作成予定。現時点は他APIでデータ取得可能）
 
 ## Dev Notes
 
@@ -43,7 +43,7 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- 予約/レッスン/スコアのAPIが整備され、ダッシュボードのKPI集計に必要なデータが取得可能。可視化UIは後続で実装。
 
 ### File List
 

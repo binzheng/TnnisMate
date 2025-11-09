@@ -1,6 +1,6 @@
 # Story 7.4: exports of reservationslessonsscores as CSV
 
-Status: drafted
+Status: done
 
 ## Story
 

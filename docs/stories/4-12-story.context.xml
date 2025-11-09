@@ -1,0 +1,18 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>12</storyId>
+    <title>cross-check both calendars overlay</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-12-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>overlay calendars</iWant>
+    <soThat>重なりを把握できる</soThat>
+  </story>
+  <acceptanceCriteria>重なり強調、候補へジャンプ</acceptanceCriteria>
+</story-context>
+

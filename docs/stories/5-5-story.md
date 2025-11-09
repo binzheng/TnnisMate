@@ -1,6 +1,6 @@
 # Story 5.5: to configure and run an external API sync
 
-Status: drafted
+Status: done
 
 ## Story
 

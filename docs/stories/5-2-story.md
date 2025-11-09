@@ -1,6 +1,6 @@
 # Story 5.2: a field-mapping configuration (CSVdomain fields)
 
-Status: drafted
+Status: done
 
 ## Story
 

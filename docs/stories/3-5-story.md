@@ -1,6 +1,6 @@
 # Story 3.5: to enforce role-based permissions for lesson operations
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 不正な変更を防止できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（tRPCでのロールチェックとFORBIDDEN）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- lessonsRouter の create/update/delete/bulkChange にてロール（coach/operator/admin）を厳格に判定し、権限不足は FORBIDDEN を返す。UI 側は今後ロールに応じた操作制御を実装予定。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/lessons.ts

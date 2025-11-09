@@ -1,6 +1,6 @@
 # Story 4.5: to cross-check proposals with both players calendars for
 
-Status: drafted
+Status: done
 
 ## Story
 

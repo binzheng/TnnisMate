@@ -1,6 +1,8 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import Credentials from "next-auth/providers/credentials";
+import { verifyPassword } from "~/server/auth/password";
 
 import { db } from "~/server/db";
 
@@ -25,14 +27,35 @@ declare module "next-auth" {
   // }
 }
 
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
  * @see https://next-auth.js.org/configuration/options
  */
 export const authConfig = {
+  session: {
+    strategy: "jwt", // Credentials providerはJWT strategyのみサポート
+  },
   providers: [
     DiscordProvider,
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (creds) => {
+        const email = (creds as any)?.email as string | undefined;
+        const password = (creds as any)?.password as string | undefined;
+        if (!email || !password) return null;
+        const user = await db.user.findUnique({ where: { email } });
+        if (!user) return null;
+        const ok = verifyPassword(password, user.passwordHash ?? null);
+        if (!ok) return null;
+        return { id: user.id, name: user.name ?? user.email ?? "user", email: user.email ?? undefined };
+      },
+    }),
     /**
      * ...add more providers here.
      *
@@ -44,13 +67,22 @@ export const authConfig = {
      */
   ],
   adapter: PrismaAdapter(db),
+  pages: {
+    signIn: "/login",
+  },
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    jwt: ({ token, user }) => {
+      // 初回サインイン時にuserオブジェクトが渡される
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    session: ({ session, token }): typeof session => {
+      if (token.id && typeof token.id === "string") {
+        session.user.id = token.id;
+      }
+      return session;
+    },
   },
 } satisfies NextAuthConfig;

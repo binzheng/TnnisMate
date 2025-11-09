@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-typecheck:
+    name: Lint and TypeCheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tennis_mate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: './tennis_mate/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Biome check
+        run: npm run check
+
+      - name: Run TypeScript type check
+        run: npm run typecheck
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tennis_mate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: './tennis_mate/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: tennis_mate/coverage/
+          if-no-files-found: ignore

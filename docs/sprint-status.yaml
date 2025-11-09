@@ -38,60 +38,75 @@ story_location: {project-root}/docs/stories
 development_status:
   epic-1: contexted
   1-1-story: done
-  1-2-story: in-progress
-  1-3-story: ready-for-dev
-  1-4-story: ready-for-dev
+  1-2-story: done
+  1-3-story: done
+  1-4-story: done
   1-5-story: ready-for-dev
   1-6-story: ready-for-dev
   1-7-story: ready-for-dev
   1-8-story: ready-for-dev
   epic-1-retrospective: optional
   epic-2: contexted
-  2-1-story: ready-for-dev
-  2-2-story: ready-for-dev
-  2-3-story: ready-for-dev
-  2-4-story: ready-for-dev
-  2-5-story: ready-for-dev
-  2-6-story: ready-for-dev
-  2-7-story: ready-for-dev
-  2-8-story: ready-for-dev
+  2-1-story: done
+  2-2-story: done
+  2-3-story: done
+  2-4-story: done
+  2-5-story: done
+  2-6-story: done
+  2-7-story: done
+  2-8-story: done
   epic-2-retrospective: optional
   epic-3: contexted
-  3-1-story: ready-for-dev
-  3-2-story: ready-for-dev
-  3-3-story: ready-for-dev
-  3-4-story: ready-for-dev
-  3-5-story: ready-for-dev
+  3-1-story: done
+  3-2-story: done
+  3-3-story: done
+  3-4-story: done
+  3-5-story: done
   epic-3-retrospective: optional
   epic-4: contexted
-  4-1-story: ready-for-dev
-  4-2-story: ready-for-dev
-  4-3-story: ready-for-dev
-  4-4-story: ready-for-dev
-  4-5-story: ready-for-dev
-  4-6-story: ready-for-dev
-  4-7-story: ready-for-dev
+  4-1-story: done
+  4-2-story: done
+  4-3-story: done
+  4-4-story: done
+  4-5-story: done
+  4-6-story: done
+  4-7-story: done
+  4-8-story: done
+  4-9-story: done
+  4-10-story: done
+  4-11-story: done
+  4-12-story: done
+  4-13-story: done
+  4-14-story: done
+  4-15-story: done
+  4-16-story: done
+  4-17-story: done
+  4-18-story: done
+  4-19-story: done
+  4-20-story: done
   epic-4-retrospective: optional
   epic-5: contexted
-  5-1-story: ready-for-dev
-  5-2-story: ready-for-dev
-  5-3-story: ready-for-dev
-  5-4-story: ready-for-dev
-  5-5-story: ready-for-dev
-  5-6-story: ready-for-dev
+  5-1-story: done
+  5-2-story: done
+  5-3-story: done
+  5-4-story: done
+  5-5-story: done
+  5-6-story: done
   epic-5-retrospective: optional
   epic-6: contexted
-  6-1-story: ready-for-dev
-  6-2-story: ready-for-dev
-  6-3-story: ready-for-dev
-  6-4-story: ready-for-dev
-  6-5-story: ready-for-dev
+  6-1-story: done
+  6-2-story: done
+  6-3-story: done
+  6-4-story: done
+  6-5-story: done
+  6-6-story: done
+  6-7-story: done
   epic-6-retrospective: optional
   epic-7: contexted
-  7-1-story: ready-for-dev
-  7-2-story: ready-for-dev
-  7-3-story: ready-for-dev
-  7-4-story: ready-for-dev
-  7-5-story: ready-for-dev
-  7-6-story: ready-for-dev
+  7-1-story: done
+  7-2-story: done
+  7-3-story: done
+  7-4-story: done
+  7-5-story: done
+  7-6-story: done
   epic-7-retrospective: optional

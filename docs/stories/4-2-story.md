@@ -1,6 +1,6 @@
 # Story 4.2: to search players with filters (level rangeareatime)
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 条件に合う相手を一覧できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（検索APIの下地: searchPlayers）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- matchingRouter に `searchPlayers(levelMin/levelMax/area)` を追加。UIからは `/admin/matching/profile` で確認可能。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/matching.ts

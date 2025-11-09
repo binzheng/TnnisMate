@@ -1,6 +1,6 @@
 # Story 4.6: a minimal in-app conversation thread on a proposal
 
-Status: drafted
+Status: done
 
 ## Story
 

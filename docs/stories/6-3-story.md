@@ -1,6 +1,6 @@
 # Story 6.3: to compute and display a simple rankingsummary
 
-Status: drafted
+Status: review
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 勝率や連勝/直近成績を可視化できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（簡易ランキング集計API）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- scoresRouter に `rankingSummary` を追加（勝敗の単純集計ベース）。UI は後続で可視化予定。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/scores.ts

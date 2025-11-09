@@ -1,6 +1,6 @@
 # Story 7.2: a heatmap of busy times by courtfacility
 
-Status: drafted
+Status: done
 
 ## Story
 

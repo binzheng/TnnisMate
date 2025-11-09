@@ -1,6 +1,6 @@
 # Story 4.4: to send a match proposal and the other
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that マッチングが合意ベースで成立する。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（提案APIと承認/却下API）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- matchingRouter に `sendProposal` / `actOnProposal(accept/decline)` を追加。ステータスは pending/accepted/declined。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/matching.ts

@@ -1,6 +1,6 @@
 # Story 6.2: to view my match history with filters
 
-Status: drafted
+Status: done
 
 ## Story
 

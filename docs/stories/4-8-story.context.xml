@@ -1,0 +1,23 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>8</storyId>
+    <title>player search UI with filters</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-8-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>a player search UI with level/area filters</iWant>
+    <soThat>条件でプレイヤーを素早く絞り込める。</soThat>
+    <tasks>- [ ] UI + API 結線</tasks>
+  </story>
+  <acceptanceCriteria>1. レベル/エリア検索 2. 条件保持 3. ページング/空表示</acceptanceCriteria>
+  <artifacts>
+    <docs>docs/epics.md, docs/architecture.md, docs/prd.md</docs>
+    <code>tennis_mate/src/server/api/routers/matching.ts</code>
+  </artifacts>
+</story-context>
+

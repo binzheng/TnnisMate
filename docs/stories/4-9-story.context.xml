@@ -1,0 +1,21 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>9</storyId>
+    <title>proposal create and approval UI</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-9-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>create/approve proposals</iWant>
+    <soThat>マッチングをUIで完結できる</soThat>
+  </story>
+  <acceptanceCriteria>送信成功/失敗表示、承認/却下反映</acceptanceCriteria>
+  <artifacts>
+    <code>tennis_mate/src/server/api/routers/matching.ts</code>
+  </artifacts>
+</story-context>
+

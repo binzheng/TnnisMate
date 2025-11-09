@@ -1,4 +1,12 @@
 import { postRouter } from "~/server/api/routers/post";
+import { reservationsRouter } from "~/server/api/routers/reservations";
+import { catalogRouter } from "~/server/api/routers/catalog";
+import { lessonsRouter } from "~/server/api/routers/lessons";
+import { matchingRouter } from "~/server/api/routers/matching";
+import { inventoryRouter } from "~/server/api/routers/inventory";
+import { scoresRouter } from "~/server/api/routers/scores";
+import { usersRouter } from "~/server/api/routers/users";
+import { adminRouter } from "~/server/api/routers/admin";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -8,6 +16,14 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  reservations: reservationsRouter,
+  catalog: catalogRouter,
+  lessons: lessonsRouter,
+  matching: matchingRouter,
+  inventory: inventoryRouter,
+  scores: scoresRouter,
+  users: usersRouter,
+  admin: adminRouter,
 });
 
 // export type definition of API

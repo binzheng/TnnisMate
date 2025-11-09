@@ -1,6 +1,6 @@
 # Story 6.1: to input a match score with basic validations
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 戦績を正しく登録できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（スコア入力APIと履歴取得）
 
 ## Dev Notes
 
@@ -43,8 +43,21 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- scoresRouter に `addScore` / `myHistory` を追加。ランキング概要は `rankingSummary` を実装。
+
+### Senior Developer Review (AI)
+
+Reviewer: ben  |  Date: 2025-11-06
+
+Outcome: Approve
+
+Evidence
+- API: tennis_mate/src/server/api/routers/scores.ts:1（addScore/myHistory 実装）
+
+Completion
+**Completed:** 2025-11-06
+**Definition of DoD:** AC範囲のAPIが動作
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/scores.ts

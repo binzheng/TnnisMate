@@ -1,0 +1,18 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>15</storyId>
+    <title>accessibility polish (focus, keyboard, aria)</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-15-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>keyboard/aria support</iWant>
+    <soThat>支援技術で操作できる</soThat>
+  </story>
+  <acceptanceCriteria>ARIA/キーボード/フォーカストラップ</acceptanceCriteria>
+</story-context>
+

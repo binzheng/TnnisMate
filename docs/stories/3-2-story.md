@@ -1,6 +1,6 @@
 # Story 3.2: to define pricing and cancellation policy per lesson
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 料金表示とキャンセル時の扱いが一貫する。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（LessonPolicy スキーマ/表層UI 追加の下地）
 
 ## Dev Notes
 
@@ -43,8 +43,9 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- Prisma に LessonPolicy を追加（料金/キャンセル締切/ペナルティフラグ）。次段で UI に反映予定（本コミットはスキーマ/ルーター基盤）。
 
 ### File List
 
-- TBD
+- tennis_mate/prisma/schema.prisma
+- tennis_mate/src/server/api/routers/lessons.ts

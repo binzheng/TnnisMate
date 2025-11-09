@@ -1,0 +1,18 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>10</storyId>
+    <title>compatibility score visualization on cards</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-10-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>compatibility score badges</iWant>
+    <soThat>合致度を一目で把握できる</soThat>
+  </story>
+  <acceptanceCriteria>スコア/色分けバッジ、凡例表示、簡易式</acceptanceCriteria>
+</story-context>
+

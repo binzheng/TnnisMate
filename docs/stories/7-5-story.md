@@ -1,6 +1,6 @@
 # Story 7.5: to configure operational settings (policies branding basics)
 
-Status: drafted
+Status: done
 
 ## Story
 

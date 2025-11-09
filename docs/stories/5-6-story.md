@@ -1,6 +1,6 @@
 # Story 5.6: scheduled sync and failure notifications (log-based)
 
-Status: drafted
+Status: done
 
 ## Story
 

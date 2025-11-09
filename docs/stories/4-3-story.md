@@ -1,6 +1,6 @@
 # Story 4.3: to compute a compatibility score based on level
 
-Status: drafted
+Status: done
 
 ## Story
 

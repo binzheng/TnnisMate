@@ -1,6 +1,6 @@
 # Story 5.3: a dry-run diff report before applying changes
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 差分の影響を安全に確認できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（ドライラン相当の件数計測とジョブ記録の下地）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- 本実装ではCSVレコードの件数記録とジョブ履歴の記録まで。差分の詳細比較・プレビューは後続で拡張。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/inventory.ts

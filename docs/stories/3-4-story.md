@@ -1,6 +1,6 @@
 # Story 3.4: to bulk change multiple lesson reservations
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 運営都合の変更にも素早く対応できる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（複数予約の一括変更API下地）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- lessonsRouter に `bulkChangeReservations` を追加。トランザクションで更新し、監査ログを出力。UI は後続実装。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/lessons.ts

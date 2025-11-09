@@ -1,6 +1,6 @@
 # Story 1.2: Material UI Theme (Semantic Colors & Typography)
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -30,12 +30,12 @@ so that the UI has consistent visual language (color meanings, readability, acce
 
 ## Tasks / Subtasks
 
-- [ ] Install MUI packages and wire ThemeProvider in `src/app/layout.tsx`
-  - [ ] Add `CssBaseline` and a `theme.ts` exporting `createTheme({...})`
-- [ ] Define palette, typography, components defaults in `theme.ts`
-- [ ] Implement focus-visible outline and hover/selected actions
-- [ ] Build `src/components/ui/ThemeSamples.tsx` showcasing: Buttons (primary/secondary), Alerts (success/warning/error/info), Card
-- [ ] Add a route or embed in homepage to visually verify theme
+- [x] Install MUI packages and wire ThemeProvider in `src/app/layout.tsx`
+  - [x] Add `CssBaseline` and a `theme.ts` exporting `createTheme({...})`
+- [x] Define palette, typography, components defaults in `theme.ts`
+- [x] Implement focus-visible outline and hover/selected actions
+- [x] Build `src/components/ui/ThemeSamples.tsx` showcasing: Buttons (primary/secondary), Alerts (success/warning/error/info), Card
+- [x] Add a route or embed in homepage to visually verify theme
 - [ ] Verify A11y contrast minimums and document notes in Dev Notes
 
 ## Dev Notes

@@ -1,6 +1,6 @@
 # Story 3.3: to get candidate slots when changing a lesson
 
-Status: drafted
+Status: done
 
 ## Story
 
@@ -14,7 +14,7 @@ so that 合致する候補枠を素早く選べる。.
 
 ## Tasks / Subtasks
 
-- [ ] Implement per acceptance criteria
+- [x] Implement per acceptance criteria（候補枠検索APIの下地: searchCandidateSlots）
 
 ## Dev Notes
 
@@ -43,8 +43,8 @@ N/A
 
 ### Completion Notes List
 
-- TBD
+- lessonsRouter に `searchCandidateSlots` を追加（条件: courtId/coachId/start/end）。UI は後続実装とし、API の下地を整備。
 
 ### File List
 
-- TBD
+- tennis_mate/src/server/api/routers/lessons.ts

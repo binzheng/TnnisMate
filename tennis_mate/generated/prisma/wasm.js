@@ -129,7 +129,9 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image'
+  image: 'image',
+  passwordHash: 'passwordHash',
+  role: 'role'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -138,9 +140,116 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.FacilityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourtScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  facilityId: 'facilityId'
+};
+
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  userId: 'userId',
+  start: 'start',
+  end: 'end',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonSlotScalarFieldEnum = {
+  id: 'id',
+  courtId: 'courtId',
+  coachId: 'coachId',
+  capacity: 'capacity',
+  start: 'start',
+  end: 'end',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonReservationScalarFieldEnum = {
+  id: 'id',
+  slotId: 'slotId',
+  userId: 'userId',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LessonPolicyScalarFieldEnum = {
+  id: 'id',
+  lessonType: 'lessonType',
+  priceYen: 'priceYen',
+  cancelDeadlineHours: 'cancelDeadlineHours',
+  penaltyApplicable: 'penaltyApplicable',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PlayerProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  level: 'level',
+  area: 'area',
+  available: 'available',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MatchRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  start: 'start',
+  end: 'end',
+  levelMin: 'levelMin',
+  levelMax: 'levelMax',
+  area: 'area',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MatchProposalScalarFieldEnum = {
+  id: 'id',
+  fromUser: 'fromUser',
+  toUser: 'toUser',
+  start: 'start',
+  end: 'end',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ImportJobScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  source: 'source',
+  status: 'status',
+  createdAt: 'createdAt',
+  finishedAt: 'finishedAt',
+  added: 'added',
+  updated: 'updated',
+  removed: 'removed'
+};
+
+exports.Prisma.ScoreRecordScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  opponentId: 'opponentId',
+  date: 'date',
+  result: 'result',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -153,13 +262,35 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.Role = exports.$Enums.Role = {
+  player: 'player',
+  coach: 'coach',
+  operator: 'operator',
+  admin: 'admin'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',
   Account: 'Account',
   Session: 'Session',
   User: 'User',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  Facility: 'Facility',
+  Court: 'Court',
+  Reservation: 'Reservation',
+  LessonSlot: 'LessonSlot',
+  LessonReservation: 'LessonReservation',
+  LessonPolicy: 'LessonPolicy',
+  PlayerProfile: 'PlayerProfile',
+  MatchRequest: 'MatchRequest',
+  MatchProposal: 'MatchProposal',
+  ImportJob: 'ImportJob',
+  ScoreRecord: 'ScoreRecord'
 };
 /**
  * Create the Client
@@ -209,13 +340,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below\n  // Further reading:\n  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema\n  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  createdBy   User   @relation(fields: [createdById], references: [id])\n  createdById String\n\n  @@index([name])\n}\n\n// Necessary for Next auth\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String? // @db.Text\n  access_token             String? // @db.Text\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String? // @db.Text\n  session_state            String?\n  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  refresh_token_expires_in Int?\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  image         String?\n  accounts      Account[]\n  sessions      Session[]\n  posts         Post[]\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n",
-  "inlineSchemaHash": "dd9a6edd7dcf3768e8fd246695361ce51823871115a517c30ff53e4d5bffa20b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below\n  // Further reading:\n  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema\n  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  createdBy   User   @relation(fields: [createdById], references: [id])\n  createdById String\n\n  @@index([name])\n}\n\n// Necessary for Next auth\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String? // @db.Text\n  access_token             String? // @db.Text\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String? // @db.Text\n  session_state            String?\n  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  refresh_token_expires_in Int?\n\n  @@unique([provider, providerAccountId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel User {\n  id                 String              @id @default(cuid())\n  name               String?\n  email              String?             @unique\n  emailVerified      DateTime?\n  image              String?\n  passwordHash       String?\n  accounts           Account[]\n  sessions           Session[]\n  posts              Post[]\n  role               Role                @default(player)\n  reservations       Reservation[]\n  lessonReservations LessonReservation[]\n  coachingSlots      LessonSlot[]        @relation(\"LessonSlotCoach\")\n  // Inverse relations\n  playerProfile      PlayerProfile?\n  matchRequests      MatchRequest[]\n  playerScores       ScoreRecord[]       @relation(\"PlayerScores\")\n  opponentScores     ScoreRecord[]       @relation(\"OpponentScores\")\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\n// Clean Architecture-friendly initial domain models\nenum Role {\n  player\n  coach\n  operator\n  admin\n}\n\nmodel Facility {\n  id        String   @id @default(cuid())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  courts    Court[]\n\n  @@index([name])\n}\n\nmodel Court {\n  id           String        @id @default(cuid())\n  name         String\n  facilityId   String\n  facility     Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)\n  reservations Reservation[]\n  lessonSlots  LessonSlot[]\n\n  @@index([facilityId, name])\n}\n\nmodel Reservation {\n  id        String   @id @default(cuid())\n  courtId   String\n  userId    String\n  start     DateTime\n  end       DateTime\n  createdAt DateTime @default(now())\n\n  court Court @relation(fields: [courtId], references: [id], onDelete: Cascade)\n  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([courtId, start, end])\n  @@index([userId, start, end])\n}\n\n// Lessons (Epic 3)\nmodel LessonSlot {\n  id        String   @id @default(cuid())\n  courtId   String\n  coachId   String?\n  capacity  Int      @default(1)\n  start     DateTime\n  end       DateTime\n  createdAt DateTime @default(now())\n\n  court    Court               @relation(fields: [courtId], references: [id], onDelete: Cascade)\n  coach    User?               @relation(\"LessonSlotCoach\", fields: [coachId], references: [id])\n  bookings LessonReservation[]\n\n  @@index([courtId, start, end])\n}\n\nmodel LessonReservation {\n  id        String   @id @default(cuid())\n  slotId    String\n  userId    String\n  status    String   @default(\"confirmed\") // confirmed/cancelled\n  createdAt DateTime @default(now())\n\n  slot LessonSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)\n  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([slotId])\n  @@index([userId])\n}\n\nmodel LessonPolicy {\n  id                  String   @id @default(cuid())\n  lessonType          String\n  priceYen            Int?\n  cancelDeadlineHours Int? // キャンセル締切（時間）\n  penaltyApplicable   Boolean  @default(false)\n  createdAt           DateTime @default(now())\n\n  @@unique([lessonType])\n}\n\n// Matching (Epic 4)\nmodel PlayerProfile {\n  id        String   @id @default(cuid())\n  userId    String   @unique\n  level     Int      @default(3) // 1..7 など\n  area      String? // free-text or code\n  available Json? // e.g., { days: [..], hours: [..] }\n  createdAt DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n\nmodel MatchRequest {\n  id        String   @id @default(cuid())\n  userId    String\n  start     DateTime\n  end       DateTime\n  levelMin  Int?\n  levelMax  Int?\n  area      String?\n  status    String   @default(\"open\") // open/matched/cancelled\n  createdAt DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([start, end])\n}\n\nmodel MatchProposal {\n  id        String   @id @default(cuid())\n  fromUser  String\n  toUser    String\n  start     DateTime\n  end       DateTime\n  message   String?\n  status    String   @default(\"pending\") // pending/accepted/declined\n  createdAt DateTime @default(now())\n\n  @@index([toUser, status])\n}\n\n// Inventory Sync (Epic 5)\nmodel ImportJob {\n  id         String    @id @default(cuid())\n  type       String // csv/api\n  source     String?\n  status     String    @default(\"pending\") // pending/running/success/failed\n  createdAt  DateTime  @default(now())\n  finishedAt DateTime?\n  added      Int       @default(0)\n  updated    Int       @default(0)\n  removed    Int       @default(0)\n}\n\n// Scores (Epic 6)\nmodel ScoreRecord {\n  id         String   @id @default(cuid())\n  playerId   String\n  opponentId String\n  date       DateTime\n  result     String // e.g., W/L or score string\n  createdAt  DateTime @default(now())\n\n  player   User @relation(\"PlayerScores\", fields: [playerId], references: [id], onDelete: Cascade)\n  opponent User @relation(\"OpponentScores\", fields: [opponentId], references: [id], onDelete: Cascade)\n\n  @@index([playerId, date])\n}\n",
+  "inlineSchemaHash": "02c794c77ade9a12aa48519528334ddb9fe1713bf32a5b1fc2825236ec8ee4ef",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PostToUser\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToUser\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PostToUser\"},{\"name\":\"createdById\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"providerAccountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refresh_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"access_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires_at\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"token_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scope\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"id_token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session_state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"},{\"name\":\"refresh_token_expires_in\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SessionToUser\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emailVerified\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"SessionToUser\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToUser\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"reservations\",\"kind\":\"object\",\"type\":\"Reservation\",\"relationName\":\"ReservationToUser\"},{\"name\":\"lessonReservations\",\"kind\":\"object\",\"type\":\"LessonReservation\",\"relationName\":\"LessonReservationToUser\"},{\"name\":\"coachingSlots\",\"kind\":\"object\",\"type\":\"LessonSlot\",\"relationName\":\"LessonSlotCoach\"},{\"name\":\"playerProfile\",\"kind\":\"object\",\"type\":\"PlayerProfile\",\"relationName\":\"PlayerProfileToUser\"},{\"name\":\"matchRequests\",\"kind\":\"object\",\"type\":\"MatchRequest\",\"relationName\":\"MatchRequestToUser\"},{\"name\":\"playerScores\",\"kind\":\"object\",\"type\":\"ScoreRecord\",\"relationName\":\"PlayerScores\"},{\"name\":\"opponentScores\",\"kind\":\"object\",\"type\":\"ScoreRecord\",\"relationName\":\"OpponentScores\"}],\"dbName\":null},\"VerificationToken\":{\"fields\":[{\"name\":\"identifier\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expires\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Facility\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"courts\",\"kind\":\"object\",\"type\":\"Court\",\"relationName\":\"CourtToFacility\"}],\"dbName\":null},\"Court\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facilityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facility\",\"kind\":\"object\",\"type\":\"Facility\",\"relationName\":\"CourtToFacility\"},{\"name\":\"reservations\",\"kind\":\"object\",\"type\":\"Reservation\",\"relationName\":\"CourtToReservation\"},{\"name\":\"lessonSlots\",\"kind\":\"object\",\"type\":\"LessonSlot\",\"relationName\":\"CourtToLessonSlot\"}],\"dbName\":null},\"Reservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"courtId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"start\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"end\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"court\",\"kind\":\"object\",\"type\":\"Court\",\"relationName\":\"CourtToReservation\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReservationToUser\"}],\"dbName\":null},\"LessonSlot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"courtId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"coachId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"start\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"end\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"court\",\"kind\":\"object\",\"type\":\"Court\",\"relationName\":\"CourtToLessonSlot\"},{\"name\":\"coach\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"LessonSlotCoach\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"LessonReservation\",\"relationName\":\"LessonReservationToLessonSlot\"}],\"dbName\":null},\"LessonReservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slotId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"slot\",\"kind\":\"object\",\"type\":\"LessonSlot\",\"relationName\":\"LessonReservationToLessonSlot\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"LessonReservationToUser\"}],\"dbName\":null},\"LessonPolicy\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lessonType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"priceYen\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cancelDeadlineHours\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"penaltyApplicable\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"PlayerProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"area\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"available\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PlayerProfileToUser\"}],\"dbName\":null},\"MatchRequest\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"start\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"end\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"levelMin\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"levelMax\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"area\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MatchRequestToUser\"}],\"dbName\":null},\"MatchProposal\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fromUser\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"toUser\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"start\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"end\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"ImportJob\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"source\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"finishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"added\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"updated\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"removed\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"ScoreRecord\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"playerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"opponentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"result\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"player\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PlayerScores\"},{\"name\":\"opponent\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OpponentScores\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

@@ -1,6 +1,6 @@
 # Story 6.5: to audit changes to scores (createupdatedelete)
 
-Status: drafted
+Status: done
 
 ## Story
 

@@ -56,14 +56,24 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  posts         Post[]
+  id                 String              @id @default(cuid())
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?
+  image              String?
+  passwordHash       String?
+  accounts           Account[]
+  sessions           Session[]
+  posts              Post[]
+  role               Role                @default(player)
+  reservations       Reservation[]
+  lessonReservations LessonReservation[]
+  coachingSlots      LessonSlot[]        @relation("LessonSlotCoach")
+  // Inverse relations
+  playerProfile      PlayerProfile?
+  matchRequests      MatchRequest[]
+  playerScores       ScoreRecord[]       @relation("PlayerScores")
+  opponentScores     ScoreRecord[]       @relation("OpponentScores")
 }
 
 model VerificationToken {
@@ -72,4 +82,159 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// Clean Architecture-friendly initial domain models
+enum Role {
+  player
+  coach
+  operator
+  admin
+}
+
+model Facility {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courts    Court[]
+
+  @@index([name])
+}
+
+model Court {
+  id           String        @id @default(cuid())
+  name         String
+  facilityId   String
+  facility     Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+  lessonSlots  LessonSlot[]
+
+  @@index([facilityId, name])
+}
+
+model Reservation {
+  id        String   @id @default(cuid())
+  courtId   String
+  userId    String
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
+
+  court Court @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([courtId, start, end])
+  @@index([userId, start, end])
+}
+
+// Lessons (Epic 3)
+model LessonSlot {
+  id        String   @id @default(cuid())
+  courtId   String
+  coachId   String?
+  capacity  Int      @default(1)
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
+
+  court    Court               @relation(fields: [courtId], references: [id], onDelete: Cascade)
+  coach    User?               @relation("LessonSlotCoach", fields: [coachId], references: [id])
+  bookings LessonReservation[]
+
+  @@index([courtId, start, end])
+}
+
+model LessonReservation {
+  id        String   @id @default(cuid())
+  slotId    String
+  userId    String
+  status    String   @default("confirmed") // confirmed/cancelled
+  createdAt DateTime @default(now())
+
+  slot LessonSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([slotId])
+  @@index([userId])
+}
+
+model LessonPolicy {
+  id                  String   @id @default(cuid())
+  lessonType          String
+  priceYen            Int?
+  cancelDeadlineHours Int? // キャンセル締切（時間）
+  penaltyApplicable   Boolean  @default(false)
+  createdAt           DateTime @default(now())
+
+  @@unique([lessonType])
+}
+
+// Matching (Epic 4)
+model PlayerProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  level     Int      @default(3) // 1..7 など
+  area      String? // free-text or code
+  available Json? // e.g., { days: [..], hours: [..] }
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model MatchRequest {
+  id        String   @id @default(cuid())
+  userId    String
+  start     DateTime
+  end       DateTime
+  levelMin  Int?
+  levelMax  Int?
+  area      String?
+  status    String   @default("open") // open/matched/cancelled
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([start, end])
+}
+
+model MatchProposal {
+  id        String   @id @default(cuid())
+  fromUser  String
+  toUser    String
+  start     DateTime
+  end       DateTime
+  message   String?
+  status    String   @default("pending") // pending/accepted/declined
+  createdAt DateTime @default(now())
+
+  @@index([toUser, status])
+}
+
+// Inventory Sync (Epic 5)
+model ImportJob {
+  id         String    @id @default(cuid())
+  type       String // csv/api
+  source     String?
+  status     String    @default("pending") // pending/running/success/failed
+  createdAt  DateTime  @default(now())
+  finishedAt DateTime?
+  added      Int       @default(0)
+  updated    Int       @default(0)
+  removed    Int       @default(0)
+}
+
+// Scores (Epic 6)
+model ScoreRecord {
+  id         String   @id @default(cuid())
+  playerId   String
+  opponentId String
+  date       DateTime
+  result     String // e.g., W/L or score string
+  createdAt  DateTime @default(now())
+
+  player   User @relation("PlayerScores", fields: [playerId], references: [id], onDelete: Cascade)
+  opponent User @relation("OpponentScores", fields: [opponentId], references: [id], onDelete: Cascade)
+
+  @@index([playerId, date])
 }

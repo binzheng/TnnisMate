@@ -55,6 +55,11 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
           headers: () => {
             const headers = new Headers();
             headers.set("x-trpc-source", "nextjs-react");
+            // Include current path for server-side callbackUrl computation
+            if (typeof window !== "undefined") {
+              const ref = window.location.pathname + (window.location.search || "");
+              headers.set("x-trpc-referrer", ref);
+            }
             return headers;
           },
         }),

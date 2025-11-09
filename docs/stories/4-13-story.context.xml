@@ -1,0 +1,18 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>13</storyId>
+    <title>block and report UI</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-13-story.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a user</asA>
+    <iWant>block/report another player</iWant>
+    <soThat>不適切な相手を避けられる</soThat>
+  </story>
+  <acceptanceCriteria>確認ダイアログ、状態反映/除外</acceptanceCriteria>
+</story-context>
+

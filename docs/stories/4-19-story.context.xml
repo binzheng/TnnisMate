@@ -1,0 +1,12 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>19</storyId>
+    <title>reusable PlayerCard component + theme alignment</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/4-19-story.md</sourceStoryPath>
+  </metadata>
+</story-context>
+

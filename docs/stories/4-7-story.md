@@ -1,6 +1,6 @@
 # Story 4.7: to block or report another player
 
-Status: drafted
+Status: done
 
 ## Story
 

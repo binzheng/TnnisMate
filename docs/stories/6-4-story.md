@@ -1,6 +1,6 @@
 # Story 6.4: to importexport scores via CSV
 
-Status: drafted
+Status: done
 
 ## Story
 

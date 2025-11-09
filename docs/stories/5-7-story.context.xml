@@ -1,0 +1,12 @@
+<story-context id="auto" v="1.0">
+  <metadata>
+    <epicId>5</epicId>
+    <storyId>7</storyId>
+    <title>CSV preview table with mapping + diff apply UI</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-06T00:00:00Z</generatedAt>
+    <generator>SM batch</generator>
+    <sourceStoryPath>docs/stories/5-7-story.md</sourceStoryPath>
+  </metadata>
+</story-context>
+
